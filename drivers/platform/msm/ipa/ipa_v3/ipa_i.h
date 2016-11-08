@@ -1288,6 +1288,7 @@ struct ipa3_context {
 	bool ipa_initialization_complete;
 	struct list_head ipa_ready_cb_list;
 	struct completion init_completion_obj;
+	struct completion uc_loaded_completion_obj;
 	struct ipa3_smp2p_info smp2p_info;
 	u32 ipa_tz_unlock_reg_num;
 	struct ipa_tz_unlock_reg_info *ipa_tz_unlock_reg;
@@ -1462,7 +1463,9 @@ int ipa3_reset_gsi_event_ring(u32 clnt_hdl);
 int ipa3_set_usb_max_packet_size(
 	enum ipa_usb_max_usb_packet_size usb_max_packet_size);
 
-int ipa3_xdci_connect(u32 clnt_hdl, u8 xferrscidx, bool xferrscidx_valid);
+int ipa3_xdci_start(u32 clnt_hdl, u8 xferrscidx, bool xferrscidx_valid);
+
+int ipa3_xdci_connect(u32 clnt_hdl);
 
 int ipa3_xdci_disconnect(u32 clnt_hdl, bool should_force_clear, u32 qmi_req_id);
 
@@ -1820,6 +1823,7 @@ void ipa3_dump_buff_internal(void *base, dma_addr_t phy_base, u32 size);
 int ipa3_controller_static_bind(struct ipa3_controller *controller,
 		enum ipa_hw_type ipa_hw_type);
 int ipa3_cfg_route(struct ipahal_reg_route *route);
+int ipa3_send_cmd_timeout(u16 num_desc, struct ipa3_desc *descr, u32 timeout);
 int ipa3_send_cmd(u16 num_desc, struct ipa3_desc *descr);
 int ipa3_cfg_filter(u32 disable);
 int ipa3_pipe_mem_init(u32 start_ofst, u32 size);
@@ -2015,4 +2019,5 @@ int ipa3_smmu_map_peer_reg(phys_addr_t phys_addr, bool map);
 int ipa3_smmu_map_peer_buff(u64 iova, phys_addr_t phys_addr,
 	u32 size, bool map);
 struct dentry *ipa_debugfs_get_root(void);
+bool ipa3_is_msm_device(void);
 #endif /* _IPA3_I_H_ */
