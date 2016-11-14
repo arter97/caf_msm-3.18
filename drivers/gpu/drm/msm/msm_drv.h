@@ -478,7 +478,7 @@ static inline int align_pitch(int width, int bpp)
 	return bytespp * ALIGN(width, 32);
 }
 
-static inline enum msm_mdp_display_id msm_get_dislay_id(
+static inline enum msm_mdp_display_id msm_get_display_id(
 	const char *display_type)
 {
 	if (!display_type)
