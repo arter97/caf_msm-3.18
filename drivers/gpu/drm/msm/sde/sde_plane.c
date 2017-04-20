@@ -1,4 +1,4 @@
-/* Copyright (c) 2015-2016, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2015-2017, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -565,21 +565,17 @@ static void _sde_plane_setup_scaler(struct sde_phy_plane *pp,
 		/* populate from user space */
 		SDE_DEBUG("pixel ext blob detected\n");
 		for (i = 0; i < SDE_MAX_PLANES; i++) {
-			pe->num_ext_pxls_left[i] = sc_u1->lr.num_pxls_start[i];
-			pe->num_ext_pxls_right[i] = sc_u1->lr.num_pxls_end[i];
-			pe->left_ftch[i] = sc_u1->lr.ftch_start[i];
-			pe->right_ftch[i] = sc_u1->lr.ftch_end[i];
-			pe->left_rpt[i] = sc_u1->lr.rpt_start[i];
-			pe->right_rpt[i] = sc_u1->lr.rpt_end[i];
-			pe->roi_w[i] = sc_u1->lr.roi[i];
+			pe->left_ftch[i] = sc_u1->pe.left_ftch[i];
+			pe->right_ftch[i] = sc_u1->pe.right_ftch[i];
+			pe->left_rpt[i] = sc_u1->pe.left_rpt[i];
+			pe->right_rpt[i] = sc_u1->pe.right_rpt[i];
+			pe->roi_w[i] = sc_u1->pe.num_ext_pxls_lr[i];
 
-			pe->num_ext_pxls_top[i] = sc_u1->tb.num_pxls_start[i];
-			pe->num_ext_pxls_btm[i] = sc_u1->tb.num_pxls_end[i];
-			pe->top_ftch[i] = sc_u1->tb.ftch_start[i];
-			pe->btm_ftch[i] = sc_u1->tb.ftch_end[i];
-			pe->top_rpt[i] = sc_u1->tb.rpt_start[i];
-			pe->btm_rpt[i] = sc_u1->tb.rpt_end[i];
-			pe->roi_h[i] = sc_u1->tb.roi[i];
+			pe->top_ftch[i] = sc_u1->pe.top_ftch[i];
+			pe->btm_ftch[i] = sc_u1->pe.btm_ftch[i];
+			pe->top_rpt[i] = sc_u1->pe.top_rpt[i];
+			pe->btm_rpt[i] = sc_u1->pe.btm_rpt[i];
+			pe->roi_h[i] = sc_u1->pe.num_ext_pxls_tb[i];
 		}
 	} else {
 		/* calculate left/right/top/bottom pixel extensions */
